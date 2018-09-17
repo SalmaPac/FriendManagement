@@ -1,0 +1,8 @@
+api.service.friendmanagement
+api.service.friendmanagement.Config
+api.service.friendmanagement.Controller
+api.service.friendmanagement.Dto
+api.service.friendmanagement.Entity
+api.service.friendmanagement.Repository
+api.service.friendmanagement.Service
+api.service.friendmanagement.Util

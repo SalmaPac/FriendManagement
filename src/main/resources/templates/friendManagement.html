@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>FriendManagement System</title>
+</head>
+<body>
+<div class="container">
+
+    <fieldset>
+        <script>
+            function connect() {
+                var friends ="{friends: [";
+                friends  =  friends + document.getElementById("useremail").innerHTML;
+                friends  =  friends +",";
+                friends  =  friends + document.getElementById("friendemail").innerHTML;
+                friends  =  friends +"]}";
+                alert(friends);
+                var json = JSON.stringify(friends);
+                alert(json);
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                       alert("Friends Connected");
+                    }
+                };
+                xhttp.open("POST", "/connectFriends", true);
+                xhttp.setRequestHeader('Content-type','application/json; charset=utf-8');
+                xhttp.send(json);
+            }
+        </script>
+
+
+        <form  method="GET" action="/friendmanagementService">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="useremail">
+                    User Email </label>
+                <div class="col-sm-4">
+                    <input type="text" id="useremail" name="useremail"  placeholder=""
+                           class="form-control" />
+                </div>
+                <br/>
+                <label class="control-label col-sm-2" for="friendemail">
+                    Friend's Email </label>
+                <div class="col-sm-4">
+                    <input type="text" id="friendemail" name="friendemail"
+                           class="form-control" />
+                </div>
+                <br/>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Get Friends List</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <h1>Friend's List</h1>
+
+                    <ul>
+                        {{#friendsList}}  <!-- Iterate over accounts -->
+                        <li>  {{friendEmailAddress}}</li>
+                        {{/friendsList}}
+                    </ul>
+                </div>
+            </div>
+        </form>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" onclick="connect()">Connect Friends</button>
+            </div>
+        </div>
+    </fieldset>
+</div>
+</body>
+</html>
